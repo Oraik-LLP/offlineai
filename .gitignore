@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.next-dev/
+.reference-phos/
+.env*
+!.env.example
+data/runtime/
+npm-debug.log*
+*.tsbuildinfo

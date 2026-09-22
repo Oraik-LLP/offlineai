@@ -1,0 +1,24 @@
+digraph G {
+rankdir=LR; graph [bgcolor="transparent", pad=0.2, nodesep=0.5, ranksep=0.7];
+node [shape=box, style="rounded", fontname="Arial", fontsize=11];
+edge [fontname="Arial", fontsize=9];
+Browser [label="User Browser"];
+BFF [label="Web / BFF"];
+Auth [label="Auth + Session"];
+Policy [label="Policy Engine"];
+Retrieval [label="Retrieval Service"];
+Tools [label="Tool Broker"];
+Model [label="Model Gateway"];
+Files [label="Approved Files / NAS"];
+Index [label="Metadata + Index"];
+Worker [label="Restricted Tool Worker"];
+Audit [label="Append-only Audit"];
+Local [label="Local Inference"];
+Hosted [label="Hosted Adapter\nDemo only", style="rounded,dashed"];
+Browser -> BFF [label=" HTTPS "];
+BFF -> Auth; BFF -> Policy; BFF -> Retrieval; BFF -> Tools; BFF -> Model;
+Retrieval -> Files; Retrieval -> Index;
+Tools -> Worker [label=" one-shot capability "]; Worker -> Files;
+Tools -> Audit; Policy -> Audit;
+Model -> Local; Model -> Hosted [style=dashed, label=" explicit demo route "];
+}

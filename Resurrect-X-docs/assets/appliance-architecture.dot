@@ -1,0 +1,15 @@
+digraph G {
+rankdir=LR; graph [bgcolor="transparent", pad=0.2]; node [shape=box, style="rounded", fontname="Arial", fontsize=10]; edge [fontname="Arial", fontsize=9];
+LAN [label="Law Firm LAN"];
+Proxy [label="Internal HTTPS\nReverse Proxy"];
+App [label="Resurrect X App"];
+GPU [label="Local GPU Inference"];
+Index [label="Local Index"];
+NAS [label="NAS Sources\nRead-only mount"];
+Out [label="Output Store\nScoped write"];
+Audit [label="Audit + Backup"];
+Mgmt [label="Management VLAN /\nPhysical Console"];
+Maint [label="Maintenance Mode"];
+Egress [label="Controlled Egress\nExplicit exception", style="rounded,dashed"];
+LAN->Proxy->App; App->GPU; App->Index; Index->NAS; App->Out; App->Audit; Mgmt->Maint->App; App->Egress [style=dashed];
+}

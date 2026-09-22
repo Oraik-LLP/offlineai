@@ -1,0 +1,11 @@
+flowchart LR
+    LAN[Law firm LAN] -->|HTTPS| RP[Reverse Proxy]
+    RP --> APP[Resurrect X App]
+    APP --> INF[Local Inference GPU]
+    APP --> IDX[Local Search / Index]
+    APP --> AUD[(Audit Store)]
+    IDX --> NAS[(NAS Source Mount - Read Only)]
+    APP --> OUT[(Output Store - Scoped Write)]
+    MGMT[Management VLAN / Local Console] --> ADMIN[Maintenance Mode]
+    ADMIN --> APP
+    APP -. Explicit exception only .-> EGRESS[Controlled Egress Proxy]

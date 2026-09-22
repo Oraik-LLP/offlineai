@@ -1,0 +1,17 @@
+flowchart TD
+    Q[User question] --> S[Resolve user + matter scope]
+    S --> ACL[Filter permitted resources]
+    ACL --> RET[Exact / semantic retrieval]
+    RET --> CLS[Classification / boundary check]
+    CLS --> CTX[Assemble cited context]
+    CTX --> LLM[Model]
+    LLM --> RESP[Answer + citations]
+    LLM --> PLAN[Optional typed tool proposal]
+    PLAN --> POL[Policy engine]
+    POL -->|deny| DENY[Blocked action]
+    POL -->|allow| APP{Approval required?}
+    APP -->|yes| HUM[Human approval]
+    APP -->|no| CAP[One-shot capability]
+    HUM --> CAP
+    CAP --> ACT[Restricted tool execution]
+    ACT --> VER[Version + audit]

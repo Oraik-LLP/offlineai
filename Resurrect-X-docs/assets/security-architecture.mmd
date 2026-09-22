@@ -1,0 +1,16 @@
+flowchart LR
+    U[User Browser] -->|HTTPS| W[Web/BFF]
+    W --> A[Auth/Session]
+    W --> P[Policy Engine]
+    W --> R[Retrieval Service]
+    W --> T[Tool Broker]
+    W --> M[Model Gateway]
+    R --> D[(Metadata / Index)]
+    R --> F[(Approved Files / NAS)]
+    T --> C[Scoped Capability]
+    C --> O[Restricted Tool Worker]
+    O --> F
+    T --> AU[(Audit)]
+    P --> AU
+    M --> L[Local Inference]
+    M -. Demo only .-> X[Hosted Model Adapter]

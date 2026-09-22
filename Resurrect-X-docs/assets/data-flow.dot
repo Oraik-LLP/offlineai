@@ -1,0 +1,20 @@
+digraph G {
+rankdir=TB; graph [bgcolor="transparent", pad=0.2]; node [shape=box, style="rounded", fontname="Arial", fontsize=10]; edge [fontname="Arial", fontsize=9];
+Q [label="User question"];
+Scope [label="Resolve user + matter scope"];
+ACL [label="Filter permitted resources"];
+Ret [label="Exact / semantic retrieval"];
+Class [label="Classification + boundary check"];
+Ctx [label="Assemble cited context"];
+LLM [label="Model (untrusted planner)"];
+Resp [label="Answer + citations"];
+Plan [label="Typed tool proposal"];
+Pol [label="Policy engine"];
+Approve [shape=diamond, label="Approval required?"];
+Human [label="Human approval"];
+Cap [label="One-shot capability"];
+Exec [label="Restricted execution"];
+Ver [label="Version + audit"];
+Deny [label="Blocked action"];
+Q->Scope->ACL->Ret->Class->Ctx->LLM; LLM->Resp; LLM->Plan->Pol; Pol->Deny [label="deny"]; Pol->Approve [label="allow"]; Approve->Human [label="yes"]; Human->Cap; Approve->Cap [label="no"]; Cap->Exec->Ver;
+}
